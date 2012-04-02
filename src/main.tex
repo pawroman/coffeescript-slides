@@ -15,6 +15,9 @@
 % MAKE ME INDEX NAO
 \makeindex
 
+% coding, with style. ($ pygmentize -L styles)
+\usemintedstyle{trac}
+
 % meta info
 \title{CoffeeScript}
 \subtitle{Prezentacja - cośtam}
@@ -34,7 +37,10 @@
     \tableofcontents
 \end{frame}
 
+%======================================
 \section{Wstęp}
+%======================================
+
 \subsection{Czemu JS jest ble?}
 
 \begin{frame}[fragile]{Czemu JS jest ble?}
@@ -55,7 +61,10 @@
     \end{itemize}
 \end{frame}
 
+%======================================
 \section{bLA}
+%======================================
+
 \subsection{ble}
 
 % musi być fragile żeby działał minted...
@@ -66,11 +75,76 @@
     % vim: :set expandtab
     % jeśli nadal nie działa: :retab
     % gobble=4 żeby zeżarł 4 poprzedzające spacje
-    \begin{minted}[gobble=4]{coffeescript}    
+    \begin{minted}[gobble=4]{coffeescript}
     class D
         constructor: (@x) ->
             @a = 5
             alert("ALE FAJNE")
+    \end{minted}
+\end{frame}
+
+%======================================
+\section{Przyspieszony kurs składni}
+%======================================
+
+\begin{frame}[fragile]{Podstawy}
+    
+    \begin{minted}[gobble=4]{coffeescript}
+    clouds = 10
+    ten = "Clouds"
+    awesome = true
+
+    # obiekty (indent matters!)
+    theCompany =
+        name: "10Clouds"
+        andNot: "10 clouds"
+    # albo tak
+    theCompany = {name: "10Clouds", andNot: "10 clouds"}
+
+    list = [1, 2, -666]     # array'e
+
+    # array comprehensions
+    cubes = (math.cube num for num in list)
+
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Iteracja}
+    
+    \begin{minted}[gobble=4]{coffeescript}
+    theCompany =
+        name: "10Clouds"
+        andNot: "10 clouds"
+
+    # awesomeness
+    description = for k, v of theCompany
+        "#{k}: #{v}"
+
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Funkcje}
+    
+    \begin{minted}[gobble=4]{coffeescript}
+    a = ->
+        5
+
+    alert a()    # 5!
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Klasy, @ = this}
+    
+    \begin{minted}[gobble=4]{coffeescript}
+    class C
+        constructor: (@x = 42) ->
+
+    c = new C
+    c.x     # 42
+
+    cc = new C 55
+    cc.x     # 55
+
     \end{minted}
 \end{frame}
 
