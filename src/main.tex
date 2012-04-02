@@ -1,0 +1,83 @@
+% beamer stuff
+\documentclass[xcolor=dvipsnames]{beamer} 
+\usetheme{Rochester}
+\usecolortheme[named=MidnightBlue]{structure}
+
+% bądź polski.
+\usepackage{polski}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+
+% inne pakiety
+\usepackage{minted}     % używa pygments do kolorowania kodu
+
+% meta info
+\title{CoffeeScript}
+\subtitle{Prezentacja - cośtam}
+\author{Piotr Klibert, Paweł Romanowski}
+
+% document body
+\begin{document}
+
+\begin{frame}[plain]
+    \begin{center}
+        \includegraphics[scale=0.25]{img/logo.png}
+    \end{center}
+    \titlepage
+\end{frame}
+
+\begin{frame}{O czym będzie?}
+    \tableofcontents
+\end{frame}
+
+\section{Wstęp}
+\subsection{Czemu JS jest ble?}
+
+\begin{frame}[fragile]{Czemu JS jest ble?}
+    \begin{itemize}
+        \item bo a
+        \item bo b
+    \end{itemize}
+\end{frame}
+
+\subsection{Alternatywy do JS}
+\begin{frame}[fragile]{Alternatywy}
+    Alternatywy?
+
+    \begin{itemize}
+        \item jQuery
+        \pause   % zrób pauzę - nowy slajd
+        \item CoffeeScript!!1
+    \end{itemize}
+\end{frame}
+
+\section{bLA}
+\subsection{ble}
+
+% musi być fragile żeby działał minted...
+\begin{frame}[fragile]{Slajd2}
+    Trochę kodu.
+
+    % używać spacji do indentu kodu!
+    % vim: :set expandtab
+    % jeśli nadal nie działa: :retab
+    % gobble=4 żeby zeżarł 4 poprzedzające spacje
+    \begin{minted}[gobble=4]{coffeescript}    
+    class D
+        constructor: (@x) ->
+            @a = 5
+            alert("ALE FAJNE")
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Koniec}
+    \begin{center}
+        Dziękujemy za uwagę.
+        
+        \vspace{2 cm}
+        \pause
+        Pytania?
+    \end{center}
+\end{frame}
+
+\end{document}
