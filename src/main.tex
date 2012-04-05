@@ -16,11 +16,11 @@
 \makeindex
 
 % coding, with style. ($ pygmentize -L styles)
-\usemintedstyle{trac}
+\usemintedstyle{tango}
 
 % meta info
 \title{CoffeeScript}
-\subtitle{Prezentacja - cośtam}
+\subtitle{XXX: invent the title :P}
 \author{Piotr Klibert, Paweł Romanowski}
 
 % document body
@@ -33,26 +33,53 @@
     \titlepage
 \end{frame}
 
-\begin{frame}{O czym będzie?}
+\begin{frame}{What is it about?}
     \tableofcontents
 \end{frame}
 
-%======================================
-\section{Wstęp}
-%======================================
 
-\subsection{Czemu JS jest ble?}
+% to powyzej to boilerplate - prawdziwa praca odbywa sie ponizej ;)
 
-\begin{frame}[fragile]{Czemu JS jest ble?}
+
+\section{JavaScript}
+%==================================
+
+\subsection{Is JavaScript really that bad?}
+%----------------------------------
+%(BTW: w Erlangu komentarze tez sa od '%')
+\begin{frame}[fragile]{}
+    Is JavaScript really that bad?
+\end{frame}
+
+\begin{frame}[fragile]{There are many reasons to hate JS.}
+    Most of them are either outdated, not JS fault or completely subjective.
+    \begin{itemize}
+        \item lack of dictionaries (maps, associative arrays) in the language
+        \item nested blocks =/= nested scopes
+        \item dynamic context of execution (design choice - different, not worse)
+        \item (fake OOP) prototypal inheritence instead of class-based one (design choice)
+        \item everything in JavaScript is mutable (well, strings are not.)
+        \item there are differences between implementations (between browsers - this was a concern before jQuery)
+        \item you need callbacks for everything; everything is asynchronous (and event based, design choice)
+        \item it is extremely slow (it is most certainly NOT slow)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{But there are real fails, aren't there?}
+    Oh, and how many!
+    `while' statement, implicit global scope of variables, no modules of any 
+    kind, semicolon insertion, type coercion rules [to ostatnie czcionka 42px ;], etc.
     \begin{itemize}
         \item bo a
         \item bo b
     \end{itemize}
 \end{frame}
 
-\subsection{Alternatywy do JS}
-\begin{frame}[fragile]{Alternatywy}
-    Alternatywy?
+\subsection{JS alternatives}
+%----------------------------------
+
+\begin{frame}[fragile]{JS alternatives}
+    Not just
 
     \begin{itemize}
         \item jQuery
@@ -61,8 +88,7 @@
     \end{itemize}
 \end{frame}
 
-%======================================
-\section{bLA}
+\section{CoffeeScript}
 %======================================
 
 \subsection{ble}
@@ -72,7 +98,7 @@
     Trochę kodu.
 
     % używać spacji do indentu kodu!
-    % vim: :set expandtab
+    % vim: :set expandtab -- co Ty nie powiesz... :D
     % jeśli nadal nie działa: :retab
     % gobble=4 żeby zeżarł 4 poprzedzające spacje
     \begin{minted}[gobble=4]{coffeescript}
