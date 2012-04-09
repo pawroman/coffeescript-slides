@@ -1,8 +1,34 @@
+%------------------------------------------------------------------------------
+%
+%   CoffeeScript slides
+%       by: Piotr Klibert and Paweł Romanowski
+%   
+%   Released under the CC BY-SA 3.0 license.
+%       See README file for more information.
+%
+%   Visit github page:
+%       https://github.com/promanow/coffeescript-slides/tree/
+%
+%   And our employer's site:
+%       http://10clouds.com
+%
+%------------------------------------------------------------------------------
+
+%%
+%% Setup boilerplate
+%%
+
 % beamer stuff
 \documentclass[xcolor=dvipsnames]{beamer} 
+
+% lol, this is a beamer command actually - gets rid of bottom navigation bar
+\beamertemplatenavigationsymbolsempty
+
+% beamer themes
 \usetheme{Rochester}
 \usecolortheme[named=MidnightBlue]{structure}
 
+% input & encoding
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
@@ -31,12 +57,17 @@
 % still... need to end it with \end{minted}
 \newcommand{\coffee}{\begin{minted}[gobble=4]{coffeescript}}
 
+\newcommand{\epic}[1]{\textbf{\huge{{#1}}}}
+
 % Note: use *SPACE* to indent the code!
 % vim: :set expandtab
 %      :retab
 
 
-% document body
+%%
+%% document body
+%%
+
 \begin{document}
 
 \begin{frame}[plain]
@@ -56,60 +87,93 @@
 %% Enough boilerplate! Lets start this shit up 
 %%
 
-
 \section{JavaScript}
 %==================================
 
 \subsection{Is JavaScript really that bad?}
 %----------------------------------
 \begin{frame}[fragile]{}
-    Is JavaScript really that bad?
+    Is JavaScript really \textbf{that} bad?
 \end{frame}
 
-\slide{There are many reasons to hate JS.}
-    Most of them are either outdated, not JS fault or completely subjective.
+\slide{There are many reasons to hate JS}
+    Most of them are either outdated, not JS fault or completely subjective. \\ % blank line
+    
+    \pause
+
     \begin{itemize}
-        \item lack of dictionaries (maps, associative arrays) in the language
-        \item nested blocks =/= nested scopes
-        \item dynamic context of execution (design choice - different, not worse)
-        \item (fake OOP) prototypal inheritence instead of class-based one (design choice)
+        \item lack of dictionaries (maps, associative arrays)
+        \item nested blocks $\not=$ nested scopes
         \item everything in JavaScript is mutable (well, strings are not.)
-        \item there are differences between implementations (between browsers - this was a concern before jQuery)
-        \item you need callbacks for everything; everything is asynchronous (and event based, design choice)
+        \item differences between implementations (between browsers - before jQuery)
         \item it is extremely slow (it is most certainly NOT slow)
     \end{itemize}
 \end{frame}
 
-\slide{But there are real fails, aren't there?}
-    Oh, and how many!
-    `while' statement, implicit global scope of variables, no modules of any 
-    kind, semicolon insertion, type coercion rules [to ostatnie czcionka 42px ;], etc.
+
+\slide{...But some of them are by design!}
+
     \begin{itemize}
-        \item bo a
-        \item bo b
+        \item \textbf{this} - dynamic context of execution
+        \item (fake OOP) prototypal inheritence (not class-based one)
+        \item callbacks for everything; everything is asynchronous (and event based)
     \end{itemize}
 \end{frame}
+
+
+\subsection{JavaScript fails}
+%----------------------------------
+\slide{But there are real fails, aren't there?}
+    Oh, and how many! \\
+
+    \begin{itemize}
+        % verb stays for "verbatim" - and + is in-line delimiter for it
+        \item \verb+while+ statement - so broken noone uses it
+        \item implicit global scope of variables
+        \item no modules of any kind
+        \item semicolor insertion
+        \item painful debugging
+        \pause
+        \item \epic{type coercion rules}
+            \begin{itemize}
+                \item counter-logic casts and promoting rules
+                \item \verb+===+ / \verb+!==+ syntax is just stupid
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
 
 \subsection{JS alternatives}
 %----------------------------------
 
 \slide{JS alternatives}
-    Not just
+    There are some: \\
 
     \begin{itemize}
-        \item jQuery
+        \item Libraries to make life easier
+            \begin{itemize}
+                \item jQuery
+                \item ...?
+            \end{itemize}
         \pause   % make a pause - new slide
-        \item CoffeeScript!!1
+        \item Languages compiled to JS
+            \begin{itemize}
+                \item some lang
+                \item CoffeeScript!!1
+            \end{itemize}
     \end{itemize}
 
 \end{frame}
 
+
+%======================================
 \section{CoffeeScript}
 %======================================
 
-\subsection{ble}
+\subsection{Intro}
+%----------------------------------
 
-\slide{Slajd2}
+\slide{Intro}
 
     \coffee
     class D
@@ -120,7 +184,7 @@
 \end{frame}
 
 %======================================
-\section{Quick syntax tutorial}
+\section{Quick CoffeeScript syntax tutorial}
 %======================================
 
 \slide{Basics - variables, built-in types}
