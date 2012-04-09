@@ -109,8 +109,15 @@
 
 \subsection{Is JavaScript really that bad?}
 %----------------------------------
-\begin{frame}[fragile]{}
-    Is JavaScript really \textbf{that} bad?
+\begin{frame}[fragile]{Let's talk about JavaScript}
+    Is JavaScript really \textbf{that} bad? \\
+    \pause
+    
+    \vspace{1cm}
+    And, if it is, is there any way to make it \emph{better}? \\
+
+    \vspace{1cm}
+    Well, let's see!
 \end{frame}
 
 \slide{There are many reasons to hate JS}
@@ -120,7 +127,7 @@
 
     \begin{itemize}
         \item lack of dictionaries (maps, associative arrays)
-        \item nested blocks $\not=$ nested scopes
+        \item nested blocks $\not=$ nested scopes   % $ is for inline math - pretty cool
         \item everything in JavaScript is mutable (well, strings are not.)
         \item differences between implementations (between browsers - before jQuery)
         \item it is extremely slow (it is most certainly NOT slow)
@@ -128,7 +135,7 @@
 \end{frame}
 
 
-\slide{...But some of them are by design!}
+\slide{\ldots But some of them are by design!}
 
     \begin{itemize}
         \item \textbf{this} - dynamic context of execution
@@ -194,7 +201,7 @@
 % 2-column test
 \begin{columns}[t]
 % remember \coffeescript command gobbles 4 spaces only
-\column{5cm}
+\column{5.5cm}
     Some CoffeeScript code
     \coffee
     class D
@@ -203,9 +210,8 @@
             alert("ALE FAJNE")
     \end{minted}
 
-\column{5cm}
+\column{5.5cm}
     Some JavaScript code
-
     \js
     a = 5
     "Some JS CODE!"
