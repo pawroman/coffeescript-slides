@@ -63,6 +63,8 @@
 % still... need to end it with \end{minted}
 \newcommand{\coffee}{\begin{minted}[gobble=4]{coffeescript}}
 
+\newcommand{\js}{\begin{minted}[gobble=4]{javascript}}
+
 \newcommand{\epic}[1]{\textbf{\huge{{#1}}}}
 
 % Note: use *SPACE* to indent the code!
@@ -180,12 +182,28 @@
 
 \slide{Intro}
 
+% 2-column test
+\begin{columns}[t]
+% remember \coffeescript command gobbles 4 spaces only
+\column{5cm}
+    Some CoffeeScript code
     \coffee
     class D
         constructor: (@x) ->
             @a = 5
             alert("ALE FAJNE")
     \end{minted}
+
+\column{5cm}
+    Some JavaScript code
+
+    \js
+    a = 5
+    "Some JS CODE!"
+    \end{minted}
+
+\end{columns}
+
 \end{frame}
 
 \subsection{Quick CoffeeScript syntax tutorial}
