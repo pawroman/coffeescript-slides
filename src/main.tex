@@ -3,14 +3,12 @@
 \usetheme{Rochester}
 \usecolortheme[named=MidnightBlue]{structure}
 
-% bądź polski.
-\usepackage{polski}
-\usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 
-% inne pakiety
-\usepackage{minted}     % używa pygments do kolorowania kodu
-\usepackage{makeidx}    % do generacji "indeksu" - potrzebne do spisu treści
+% other stuff
+\usepackage{minted}     % uses pygments to colorize source code
+\usepackage{makeidx}    % make index during compilation
 
 % MAKE ME INDEX NAO
 \makeindex
@@ -23,11 +21,27 @@
 \subtitle{XXX: invent the title :P}
 \author{Piotr Klibert, Paweł Romanowski}
 
+% command defines
+
+% \slide{title} -> quick way to make a new slide (beamer frame)
+% still... need to end it with \end{frame}
+\newcommand{\slide}[1]{\begin{frame}[fragile]{{#1}}}
+
+% \coffee -> starts minted with \begin{minted}[gobble=4]{coffeescript}
+% still... need to end it with \end{minted}
+\newcommand{\coffee}{\begin{minted}[gobble=4]{coffeescript}}
+
+% Note: use *SPACE* to indent the code!
+% vim: :set expandtab
+%      :retab
+
+
 % document body
 \begin{document}
 
 \begin{frame}[plain]
     \begin{center}
+        % coffeescript logo ;)
         \includegraphics[scale=0.25]{img/logo.png}
     \end{center}
     \titlepage
@@ -38,7 +52,9 @@
 \end{frame}
 
 
-% to powyzej to boilerplate - prawdziwa praca odbywa sie ponizej ;)
+%%
+%% Enough boilerplate! Lets start this shit up 
+%%
 
 
 \section{JavaScript}
@@ -46,12 +62,11 @@
 
 \subsection{Is JavaScript really that bad?}
 %----------------------------------
-%(BTW: w Erlangu komentarze tez sa od '%')
 \begin{frame}[fragile]{}
     Is JavaScript really that bad?
 \end{frame}
 
-\begin{frame}[fragile]{There are many reasons to hate JS.}
+\slide{There are many reasons to hate JS.}
     Most of them are either outdated, not JS fault or completely subjective.
     \begin{itemize}
         \item lack of dictionaries (maps, associative arrays) in the language
@@ -65,7 +80,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{But there are real fails, aren't there?}
+\slide{But there are real fails, aren't there?}
     Oh, and how many!
     `while' statement, implicit global scope of variables, no modules of any 
     kind, semicolon insertion, type coercion rules [to ostatnie czcionka 42px ;], etc.
@@ -78,14 +93,15 @@
 \subsection{JS alternatives}
 %----------------------------------
 
-\begin{frame}[fragile]{JS alternatives}
+\slide{JS alternatives}
     Not just
 
     \begin{itemize}
         \item jQuery
-        \pause   % zrób pauzę - nowy slajd
+        \pause   % make a pause - new slide
         \item CoffeeScript!!1
     \end{itemize}
+
 \end{frame}
 
 \section{CoffeeScript}
@@ -93,15 +109,9 @@
 
 \subsection{ble}
 
-% musi być fragile żeby działał minted...
-\begin{frame}[fragile]{Slajd2}
-    Trochę kodu.
+\slide{Slajd2}
 
-    % używać spacji do indentu kodu!
-    % vim: :set expandtab -- co Ty nie powiesz... :D
-    % jeśli nadal nie działa: :retab
-    % gobble=4 żeby zeżarł 4 poprzedzające spacje
-    \begin{minted}[gobble=4]{coffeescript}
+    \coffee
     class D
         constructor: (@x) ->
             @a = 5
@@ -110,12 +120,12 @@
 \end{frame}
 
 %======================================
-\section{Przyspieszony kurs składni}
+\section{Quick syntax tutorial}
 %======================================
 
-\begin{frame}[fragile]{Podstawy}
+\slide{Basics - variables, built-in types}
     
-    \begin{minted}[gobble=4]{coffeescript}
+    \coffee
     clouds = 10
     ten = "Clouds"
     awesome = true
@@ -135,9 +145,9 @@
     \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{Iteracja}
+\slide{Iteration}
     
-    \begin{minted}[gobble=4]{coffeescript}
+    \coffee
     theCompany =
         name: "10Clouds"
         andNot: "10 clouds"
@@ -149,9 +159,9 @@
     \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{Funkcje}
+\slide{Functions}
     
-    \begin{minted}[gobble=4]{coffeescript}
+    \coffee
     a = ->
         5
 
@@ -159,9 +169,9 @@
     \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{Klasy, @ = this}
+\slide{Classes, @ = this}
     
-    \begin{minted}[gobble=4]{coffeescript}
+    \coffee
     class C
         constructor: (@x = 42) ->
 
@@ -174,13 +184,13 @@
     \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{Koniec}
+\slide{End}
     \begin{center}
-        Dziękujemy za uwagę.
+        Thanks for your attention.
         
         \vspace{2 cm}
         \pause
-        Pytania?
+        Questions?
     \end{center}
 \end{frame}
 
