@@ -1,0 +1,277 @@
+0. Preface
+    a) by web developers for web developers
+    b) by pythonistas for pythonistas - no Ruby in sight
+    c) focus on client-side, but with acceptance of server-side JS/CS existence
+    d) not for purists: no distiction between language and browsers/implementations features/fails
+
+1. Why JavaScript matters?
+    a) it's everywhere! 
+        - client side: browsers
+        - server side: node.js, various other implementations
+        - OS scripting: MS Windows Scripting Host
+        - even databases: CouchDB
+    b) no plugins required (unlike flash, silverlight or Java)
+    c) AJAX and all of this Web 2.0 stuff
+
+2. What JavaScript is really?
+    a) higher order functions
+    b) lexically scoped lambdas
+    c) dynamic typing
+    d) object model based on prototypes (BTW: Io language, also Self, LPC)
+    e) variable number of function arguments
+    f) in short: modern, cool higher-level programming language
+
+3. Why JavaScript sucks?
+    a) C-like, verbose and repetitive syntax
+    b) coercion rules (http://wtfjs.com/) and == operator
+    c) with statement, switch with fallthrough
+    d) new block does not introduce new scope
+    e) Java-like distinction between primitive types and objects
+    f) broken exception handling (which exceptions we want to catch?)
+    g) differences between implementations
+    h) implicit global scope of variables
+    i) typeof operator
+    j) and so on, and so forth...
+
+
+4. Attempts to make it suck less.
+    a) libraries:
+        - general: Underscore.js, Functional.js, ...
+        - DOM related: jQuery, MooTools, Prototype.js, Dojo, ...
+        - OOP related: Class.js, Base.js, Backbone.js, ...
+    b) they all are quite good
+    c) but we'd like some more!
+
+5. Enter CoffeeScript
+    a) an attempt to make working with JS pleasant
+    b) WITHOUT changing language semantics (GWT, Objective-J, others)
+    c) "It's just JavaScript!" - readable and linted at that
+    d) encourages "best practices" of JS
+    e) written itself in CoffeeScript (can compile CS->JS in the browser)
+    f) works extremelly well with Underscore and Backbone
+    g) in fact, works well with every JS library in existence
+    g) node + coffee instead of a browser for quickly trying some code
+    h) good support for CS in IDEs (VIM, ofc, rulez!)
+
+6. Coffee prerequisites
+    a) !!!deep understanding and respect for JavaScript semantics!!!
+    b) conviction that readability counts
+    c) belief that syntax matters
+    e) courage to try something new, openmindedness
+
+7. CofeeScript features overview
+    a) NOTE: It's very important to know what your CoffeeScript compiles to!
+       because when debugging you deal with JS and CS simultaneusly
+    b) functions and arguments
+
+func = (args...) ->
+    console.log arg for arg in args 
+    null
+
+func ["some", "args", "for", "func"]...
+
+equivalent of
+def func(*args):
+    [console.log(arg) for arg in args]
+
+func(*["some", "args", "for", "func"])
+
+    c) default arguments
+
+pow = (x, p=2) ->
+    ret = 1
+    for i in [0...p]
+        ret *= x
+    ret
+
+pow 9 # 9 squared
+pow 9, 3 # 9 cubed
+
+equivalent of
+
+def pow(x, p=2):
+    ret = 1
+    for i in range(p):
+        ret *= x
+    return ret
+
+    d) strings...
+
+s = "You can write your multiline 
+     string as comfortably as you would 
+     in python!"
+
+s = """In the previous example leading
+       indents were stripped - they're
+       preserved now."""
+
+    e) ...and string interpolation
+
+templ = (ctx) ->
+    "I would like some #{ctx.what} please!"
+
+equivalent of
+
+def templ(ctx):
+    return "I would like some %(what)s please!" % ctx
+
+console.log templ {what: "Coffee"}
+#BTW: implicit parens. These are all valid:
+console.log templ({what: "Coffee"})
+console.log (templ {what: "Coffee"})
+console.log(templ {what:"Coffee"})
+
+# unlike in python, there could be anything in #{}
+"Counting: #{x for x in [1..10]}"
+"Side effect of string interpolation: #{console.log [1..10]}"
+
+    f) loops and "comprehensions" (WARNING: these are NOT real comprehensions!) and slices
+
+numbers = (x for x in [1..10])
+
+equivalent of
+
+numbers = [x for x in range(1, 11)]
+
+# every loop returns a list of values from each step, not just the form with parens
+numbers = for x in [1..10]
+    x
+
+no direct equivalent
+
+# ranges
+numbers = [1..10] # inclusive
+numbers2 = [1...10] # exclusive
+
+equivalent of
+
+numbers = range(1, 11)
+numbers2 = range(1, 10)
+
+# slice
+slice = numbers[3...5]
+
+equivalent of
+
+slice = numbers[3:5]
+
+# now for objects
+
+obj = 
+    property: "value"
+    number: 9
+
+for k, v of obj
+    console.log k, v
+
+equivalent of
+
+obj = {
+    "property" : "value",
+    "number" : 9
+}
+
+for k, v in obj.items():
+    print k, v
+
+# prototype chain and looping (no direct equivalent)
+
+ctor = ->
+ctor.prototype = {base: "from ancestor"}
+
+obj = new ctor
+obj.sub = "my own!"
+
+for own k, v of obj
+    console.log "#{k} : #{v}"
+
+# outputs just "sub : my own"
+
+    g) destructuring assignment (should be available in the future JS as well)
+
+array = [1..10]
+[first, middle..., last] = array
+
+first == 1
+last == 10
+middle.length == 8
+
+# a bit more complicated:
+objects = ({id: x, value: "something#{x}"} for x in [1..10])
+[_..., {value}, _, _] = objects
+
+# and it works in IE6, too!
+
+    h) classes! (well, not really)
+
+# have you read Backbone.js sources? You really should - class and extends 
+# keywords implement the same inheritance model that Backbone.View.extends 
+# provides.
+#
+# Also, I won't translate this into Python, sorry.
+
+class Base
+    constructor: (args...) ->
+        @args = args
+
+class Sub extends Base
+    constructor: (args...) ->
+        args = (String::toUpperCase.call(x) for x in args)
+        super(args...)
+
+sub = new Sub("some", "silly", "strings")
+
+sub instanceof Sub # true
+sub instanceof Base # also true! for free!
+
+# enter "fat arrow"!
+
+class MyView extends Backbone.View
+    events:
+        "click .my-button" : "buttonClicked"
+
+    initialize: () ->
+        @el.find(".second-button").click(@alsoClicked)
+        # no _.bind or _.bindAll in sight, right? but it
+        # works!
+    
+    buttonClicked: (ev) => # here the magic happens
+        @myButtonClicked = true
+
+    alsoClicked: (ev) =>
+        @secondButtonClicked = true
+
+
+    i) the rest
+
+# chained comparisons
+if 0 < i < 10 then console.log i else console.log "not in range"
+
+# existential operator and assignment
+variable = "value"
+
+if not variable?
+    variable = "default value"
+
+# shorter form
+
+variable ?= "default value"
+
+# also in place of accessor `.`
+obj = {property: "value"}
+obj.property.toUpperCase() # ok
+obj.otherProperty.toUpperCase() # TypeError!
+obj.otherProperty?.toUpperCase() # undefined
+
+8. CoffeeScript - syntactic sugar for JS
+    a) just JavaScript with terser syntax
+    b) typically 1/3 less code to do the same thing
+    c) exposes "the good parts" of JS
+    d) hides ugly parts at the same time
+    e) causes no performace penalty (at runtime)
+    f) easily integrated with various environments (django-pipeline for example)
+
+9. You might be also interested in...
+    a) coco - CoffeeScript meets Perl and Haskell
+    b) CoffeeKup - CS based DSL for generating html
+    c) 
