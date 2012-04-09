@@ -35,6 +35,12 @@
 % other stuff
 \usepackage{minted}     % uses pygments to colorize source code
 \usepackage{makeidx}    % make index during compilation
+\usepackage{hyperref}   % handles links & urls
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=MidnightBlue
+}
 
 % MAKE ME INDEX NAO
 \makeindex
@@ -171,7 +177,6 @@
 %======================================
 
 \subsection{Intro}
-%----------------------------------
 
 \slide{Intro}
 
@@ -183,9 +188,8 @@
     \end{minted}
 \end{frame}
 
-%======================================
-\section{Quick CoffeeScript syntax tutorial}
-%======================================
+\subsection{Quick CoffeeScript syntax tutorial}
+%----------------------------------
 
 \slide{Basics - variables, built-in types}
     
@@ -247,6 +251,43 @@
 
     \end{minted}
 \end{frame}
+
+
+\subsection{Things CoffeeScript does better}
+%----------------------------------
+\slide{Things CoffeeScript does better}
+    \begin{enumerate}
+        \item Fixes some broken JS syntax
+        \item Integrates with Backbone classes nicely
+        \item ...
+    \end{enumerate}
+\end{frame}
+
+
+\subsection{What's not so cool}
+%----------------------------------
+\slide{What's not so cool?}
+    \begin{enumerate}
+        \item Debugging - we debug result JS
+        \item ...
+    \end{enumerate}
+\end{frame}
+
+
+%======================================
+\section{Further reading}
+%======================================
+\slide{Further reading}
+    \begin{itemize}
+        \item Official site - learn by example \\
+            \url{http://coffeescript.org/}
+        \item The Little Book on CoffeeScript \\
+            \url{http://arcturo.github.com/library/coffeescript/index.html}
+        \item CoffeeScript, Meet Backbone.js: A Tutorial \\
+            \url{http://adamjspooner.github.com/coffeescript-meet-backbonejs/}
+    \end{itemize}
+\end{frame}
+
 
 \slide{End}
     \begin{center}
