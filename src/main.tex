@@ -50,7 +50,7 @@
 
 % meta info
 \title{CoffeeScript}
-\subtitle{XXX: invent the title :P}
+\subtitle{The little language to make JS better}
 \author{Piotr Klibert, Paweł Romanowski}
 
 % command defines
@@ -107,84 +107,84 @@
 \section{JavaScript}
 %==================================
 
-\subsection{Is JavaScript really that bad?}
+
+\subsection{What is JS?}
 %----------------------------------
-\begin{frame}[fragile]{Let's talk about JavaScript}
-    Is JavaScript really \textbf{that} bad? \\
-    \pause
-    
-    \vspace{1cm}
-    And, if it is, is there any way to make it \emph{better}? \\
-
-    \vspace{1cm}
-    Well, let's see!
-\end{frame}
-
-\slide{There are many reasons to hate JS}
-    Most of them are either outdated, not JS fault or completely subjective. \\ % blank line
-    
-    \pause
-
+\slide{What is JS?}
     \begin{itemize}
-        \item lack of dictionaries (maps, associative arrays)
-        \item nested blocks $\not=$ nested scopes   % $ is for inline math - pretty cool
-        \item everything in JavaScript is mutable (well, strings are not.)
-        \item differences between implementations (between browsers - before jQuery)
-        \item it is extremely slow (it is most certainly NOT slow)
-    \end{itemize}
-\end{frame}
+        \item higher order functions
+        \item lexically scoped lambdas
+        \item dynamic typing, dynamic context (\textbf{this})
+        \item object model based on prototypes (BTW: Io language, also Self, LPC)
+        \item variable number of function arguments
+        \item callbacks, events, asynchronicity
 
-
-\slide{\ldots But some of them are by design!}
-
-    \begin{itemize}
-        \item \textbf{this} - dynamic context of execution
-        \item (fake OOP) prototypal inheritence (not class-based one)
-        \item callbacks for everything; everything is asynchronous (and event based)
-    \end{itemize}
-\end{frame}
-
-
-\subsection{JavaScript fails}
-%----------------------------------
-\slide{But there are real fails, aren't there?}
-    Oh, and how many! \\
-
-    \begin{itemize}
-        % verb stays for "verbatim" - and + is in-line delimiter for it
-        \item \verb+while+ statement - so broken noone uses it
-        \item implicit global scope of variables
-        \item no modules of any kind
-        \item semicolor insertion
-        \item painful debugging
         \pause
+        \vspace{0.5cm}
+
+        \item in short: modern, cool higher-level programming language
+        \item \ldots used widely
+    \end{itemize}
+\end{frame}
+
+
+\subsection{Bad things about JS}
+%----------------------------------
+
+\slide{Really, why does it suck?}
+
+    \begin{itemize}
+        \item C-like, verbose and bloated syntax
+        % verb stays for "verbatim" - and + is in-line delimiter for it
+        \item \verb+with+ statement, fallthrough \verb+switch+
+        \item broken exception handling (can't specify which exceptions)
+        \item differences between implementations
+        \item \verb+typeof+ operator
+        \item painful debugging
+        \item semicolor insertion
+        \item lack of dictionaries (maps, associative arrays)
+    \end{itemize}
+\end{frame}
+
+
+\slide{Really, why does it suck? (pt. 2)}
+    \begin{itemize}
+        \item no modules, implicit global scope of variables
+        \item Java-like distinction between objects and primitives
+        \item new block $\not=$ new scope   % $ is for inline math - pretty cool
+
+        \pause
+
         \item \epic{type coercion rules}
             \begin{itemize}
+                \item \verb+==+ operator
                 \item counter-logic casts and promoting rules
                 \item \verb+===+ / \verb+!==+ syntax is just stupid
+                \item \url{http://wtfjs.com} if you're not convinced yet
             \end{itemize}
+        \item and so on \ldots
     \end{itemize}
 \end{frame}
 
 
-\subsection{JS alternatives}
+\subsection{Attempts to make it better}
 %----------------------------------
 
-\slide{JS alternatives}
-    There are some: \\
+\slide{Attempts to make JS better}
 
     \begin{itemize}
-        \item Libraries to make life easier
+        \item libraries
             \begin{itemize}
-                \item jQuery
-                \item ...?
+                \item general: Underscore.js, Functional.js, \ldots
+                \item DOM related: jQuery, MooTools, Prototype.js, Dojo, \ldots
+                \item OOP related: Class.js, Base.js, Backbone.js, \ldots
             \end{itemize}
-        \pause   % make a pause - new slide
-        \item Languages compiled to JS
-            \begin{itemize}
-                \item some lang
-                \item CoffeeScript!!1
-            \end{itemize}
+
+        \pause
+
+        \item they all are quite good
+        \item but we'd like some more
+        \item it's the core syntax that fails
     \end{itemize}
 
 \end{frame}
@@ -196,35 +196,73 @@
 
 \subsection{Intro}
 
-\slide{Intro}
+\slide{Enter CoffeeScript}
 
-% 2-column test
-\begin{columns}[t]
-% remember \coffeescript command gobbles 4 spaces only
-\column{5.5cm}
-    Some CoffeeScript code
-    \coffee
-    class D
-        constructor: (@x) ->
-            @a = 5
-            alert("ALE FAJNE")
-    \end{minted}
-
-\column{5.5cm}
-    Some JavaScript code
-    \js
-    a = 5
-    "Some JS CODE!"
-    \end{minted}
-
-\end{columns}
+%% 2-column test
+%\begin{columns}[t]
+%% remember \coffeescript command gobbles 4 spaces only
+%\column{5.5cm}
+%    Some CoffeeScript code
+%    \coffee
+%    class D
+%        constructor: (@x) ->
+%            @a = 5
+%            alert("ALE FAJNE")
+%    \end{minted}
+%
+%\column{5.5cm}
+%    Some JavaScript code
+%    \js
+%    a = 5
+%    "Some JS CODE!"
+%    \end{minted}
+%
+%\end{columns}
+    \begin{itemize}
+        \item an attempt to make working with JS pleasant
+        \item WITHOUT changing language semantics (GWT, Objective-J, others)
+        \item Python- and Ruby-flavored syntax
+        \item ``It's just JavaScript!'' - readable and linted at that
+        \item encourages ``best practices'' of JS
+        \item written itself in CoffeeScript
+        \item can compile CS$\to$JS in the browser
+    \end{itemize}
 
 \end{frame}
 
-\subsection{Quick CoffeeScript syntax tutorial}
+
+\slide{Prerequisites}
+
+    \begin{itemize}
+        \item \textbf{understanding and respect for JS semantics}
+        \item conviction that readability counts
+        \item belief that syntax matters
+        \item courage to try sth new
+    \end{itemize}
+
+\end{frame}
+
+
+\subsection{Integration}
+%----------------------------------
+\slide{Integration}
+
+    \begin{itemize}
+        \item works extremely well with Underscore and Backbone
+        \item in fact, works well with every JS library in existence
+        \item node + coffee for quickly trying some code
+        \item good support for CS in IDEs (Vim, ofc, rulez!)
+        \item out-of-the-box, transparent support in Django-pipeline
+    \end{itemize}
+
+\end{frame}
+
+
+
+\subsection{Quick syntax tutorial}
 %----------------------------------
 
-\slide{Basics - variables, built-in types}
+\slide{Syntax tutorial: basics}
     
     \coffee
     clouds = 10
@@ -286,13 +324,17 @@
 \end{frame}
 
 
-\subsection{Things CoffeeScript does better}
+\subsection{Things it does well}
 %----------------------------------
-\slide{Things CoffeeScript does better}
+\slide{Things CoffeeScript does well}
     \begin{enumerate}
-        \item Fixes some broken JS syntax
-        \item Integrates with Backbone classes nicely
-        \item ...
+        \item it's just JS with terser syntax
+        \item fixes some broken JS syntax
+        \item typically $\frac{1}{3}$ less code to write
+        \item exposes ``good parts'' of JS
+        \item hides ``bad parts'' at the same time
+        \item no \emph{runtime} performance penalty
+        \item integrates well
     \end{enumerate}
 \end{frame}
 
@@ -301,8 +343,11 @@
 %----------------------------------
 \slide{What's not so cool?}
     \begin{enumerate}
-        \item Debugging - we debug result JS
-        \item ...
+        \item debugging - we debug result JS
+        \item not a separate language
+            \begin{itemize}
+                \item requires JS understanding
+            \end{itemize}
     \end{enumerate}
 \end{frame}
 
@@ -315,9 +360,18 @@
         \item Official site - learn by example \\
             \url{http://coffeescript.org/}
         \item The Little Book on CoffeeScript \\
-            \url{http://arcturo.github.com/library/coffeescript/index.html}
+            \url{http://arcturo.github.com/library/coffeescript}
         \item CoffeeScript, Meet Backbone.js: A Tutorial \\
             \url{http://adamjspooner.github.com/coffeescript-meet-backbonejs/}
+    \end{itemize}
+
+    Other Coffee-based languages to check out
+    \begin{itemize}
+        \item coco - CoffeeScript meets Perl and Haskell \\
+            \url{https://github.com/satyr/coco}
+        \item CoffeeKup - CS based HTML markup \\
+            \url{http://coffeekup.org/}
+        \item \ldots
     \end{itemize}
 \end{frame}
 
