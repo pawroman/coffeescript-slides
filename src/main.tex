@@ -198,26 +198,6 @@
 
 \slide{Enter CoffeeScript}
 
-%% 2-column test
-%\begin{columns}[t]
-%% remember \coffeescript command gobbles 4 spaces only
-%\column{5.5cm}
-%    Some CoffeeScript code
-%    \coffee
-%    class D
-%        constructor: (@x) ->
-%            @a = 5
-%            alert("ALE FAJNE")
-%    \end{minted}
-%
-%\column{5.5cm}
-%    Some JavaScript code
-%    \js
-%    a = 5
-%    "Some JS CODE!"
-%    \end{minted}
-%
-%\end{columns}
     \begin{itemize}
         \item an attempt to make working with JS pleasant
         \item WITHOUT changing language semantics (GWT, Objective-J, others)
@@ -500,6 +480,85 @@
 \end{frame}
 
 
+\subsection{Other things worth mentioning}
+%----------------------------------
+\slide{Other things worth mentioning}
+    \begin{itemize}
+        \item CoffeeScript encloses all output code into anonymous JS function
+        \begin{itemize} 
+            \item enable \verb+-b+ compiler switch to disable this behavior
+            \item to create global objects:
+        \coffee
+    window.globalObject = 5
+    # or use pattern
+    root = this
+        \end{minted}
+        \end{itemize}
+        \item You can try Coffeescript online at \url{http://coffeescript.org/}
+    \end{itemize}
+\end{frame}
+
+
+\subsection{Example JS output}
+%----------------------------------
+\slide{Example JS output}
+
+\begin{columns}[t]
+% remember \coffeescript command gobbles 4 spaces only
+\column{5.5cm}
+\begin{footnotesize}
+    \coffee
+    # Just a trivial example
+    # More at http://coffeescript.org
+
+    class C
+        constructor: (@x = 42) ->
+
+
+
+        getX: ->
+            @x
+
+
+
+    c = new C
+    c.getX()
+    \end{minted}
+\end{footnotesize}
+
+\pause
+
+\column{5.5cm}
+\begin{footnotesize}
+    \js
+    (function() {
+    var C, c;
+
+    C = (function() {
+        function C(x) {
+        this.x = x != null ? x : 42;
+        }
+
+        C.prototype.getX = function() {
+        return this.x;
+        };
+        return C;
+    })();
+    c = new C;
+    c.getX();
+    }).call(this);
+    \end{minted}
+\end{footnotesize}
+
+\end{columns}
+\end{frame}
+
+
+\slide{Summary}
+    Let's sum up.
+\end{frame}
+
+
 \subsection{Things it does well}
 %----------------------------------
 \slide{Things CoffeeScript does well}
@@ -528,6 +587,12 @@
                 \item won't fix everything
                 \item sometimes strange things may happen (it's JS after all)
             \end{itemize}
+        \item does not solve some JS problems
+            \begin{itemize}
+                \item modules, namespaces
+                \item you still need to handle that yourself
+            \end{itemize}
+        \item (?) is not as mature and rock-solid as JS itself
     \end{enumerate}
 \end{frame}
 
