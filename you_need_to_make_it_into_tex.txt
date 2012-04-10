@@ -176,6 +176,8 @@ for k, v in obj.items():
 
 # prototype chain and looping (no direct equivalent)
 
+
+##### huh, isn't this too much?
 ctor = ->
 ctor.prototype = {base: "from ancestor"}
 
@@ -186,6 +188,8 @@ for own k, v of obj
     console.log "#{k} : #{v}"
 
 # outputs just "sub : my own"
+
+
 
     g) destructuring assignment (should be available in the future JS as well)
 

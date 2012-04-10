@@ -262,56 +262,155 @@
 \subsection{Quick syntax tutorial}
 %----------------------------------
 
-\slide{Syntax tutorial: basics}
+\slide{(Quick) syntax tutorial: basics}
+
+\begin{block}{Note}
+    For the sake of debugging, it's important to know what your code compiles to.
+\end{block}
+
+    \coffee
+    # functions
+    func = ->
+        5   # implicit return
+
+    # works similar to *args in Python
+    func = (args...) ->
+        console.log arg for arg in args 
+        null
+
+    # can call functions without braces
+    func "some", "args", "for", "func"
+    func ["some", "args", "for", "func"]...
+
+    \end{minted}
+
+\end{frame}
+
+
+\slide{(Quick) syntax tutorial: default arguments}
+
+    \coffee
+    pow = (x, p = 2) ->
+        ret = 1
+        for i in [0..p]  # range
+            ret *= x
+        ret
+
+    pow 9  # 9 squared
+    pow(9, 3)  # 9 cubed
+
+    \end{minted}
+
+\end{frame}
+
+
+\slide{(Quick) syntax tutorial: strings}
+
+    \coffee
+    s = "Multiline strings work
+            as in Python!" # indents converted to spaces
+
+    s2 = """A string without indents
+            stripped"""    # will contain \n etc
+
+    # string interpolation
+    templ = (ctx) ->
+        "I would like some #{ctx.what} please!"
+
+    # call templ
+    msg = templ({what: "Coffee"})
+
+    # CoffeeScript's fancy way
+    msg = templ
+        what: "Coffee"
+    \end{minted}
+
+\end{frame}
+
+
+\slide{(Quick) syntax tutorial: more on strings and function calling}
+
+    \coffee
+    templ = (ctx) ->
+        "I would like some #{ctx.what} please!"
+
+    console.log templ {what: "Coffee"}
+    console.log templ
+        what: "Coffee"
+
+    # These are all valid:
+    console.log templ({what: "Coffee"})
+    console.log (templ {what: "Coffee"})
+    console.log(templ {what:"Coffee"})
+
+    # there could be anything in #{}
+    "counting: #{x for x in [1..10]}"
+    "side effect of interpolation: #{console.log [1..10]}"
+
+    \end{minted}
+
+\end{frame}
+
+
+\slide{(Quick) syntax tutorial: iteration, comprehensions}
     
     \coffee
-    clouds = 10
-    ten = "Clouds"
-    awesome = true
+    numbers = (x for x in [1..10])  # [1, ..., 10]
+    # every loop returns a list of values from each step
+    numbers = for x in [1..10]
+        x
 
-    # obiekty (indent matters!)
-    theCompany =
-        name: "10Clouds"
-        andNot: "10 clouds"
-    # albo tak
-    theCompany = {name: "10Clouds", andNot: "10 clouds"}
+    numbers = [1..10]  # inclusive
+    numbers2 = [1...10]  # exclusive
 
-    list = [1, 2, -666]     # array'e
+    # slices
+    slice = numbers[3...5] # equivalent of Python's [3:5]
 
-    # array comprehensions
-    cubes = (math.cube num for num in list)
+    # destructuring assignment (should be in the future JS)
+    array = [1..10]
+    [first, middle..., last] = array
+
+    first == 1 and last == 10 and middle.length == 8
+    \end{minted}
+
+\end{frame}
+
+
+\slide{(Quick) syntax tutorial: iteration, comprehensions, pt.2}
+    
+    \coffee
+    obj = 
+        property: "value"
+        number: 9
+
+    # equiv. of:
+    obj = {
+        "property" : "value",
+        "number" : 9
+    }
+
+    for k, v of obj  # note the "of"!
+        console.log k, v
+
+    # keys only
+    for k of obj
+        console.log k
 
     \end{minted}
 \end{frame}
 
-\slide{Iteration}
-    
-    \coffee
-    theCompany =
-        name: "10Clouds"
-        andNot: "10 clouds"
-
-    # awesomeness
-    description = for k, v of theCompany
-        "#{k}: #{v}"
-
-    \end{minted}
-\end{frame}
-
-\slide{Functions}
-    
-    \coffee
-    a = ->
-        5
-
-    alert a()    # 5!
-    \end{minted}
-\end{frame}
 
 \slide{Classes, @ = this}
+
+    \begin{block}{Note}
+        Have you read Backbone.js sources? You really should - \verb+class+ and 
+        \verb+extends+ keywords implement the same inheritance model that
+        \verb+Backbone.View.extends+ provides.
+    \end{block}
     
     \coffee
     class C
+        # default value with assignment
         constructor: (@x = 42) ->
 
     c = new C
@@ -320,6 +419,68 @@
     cc = new C 55
     cc.x     # 55
 
+    \end{minted}
+\end{frame}
+
+
+\slide{Classes, inheritance}
+    \coffee
+    class Base
+        constructor: (args...) ->
+            @args = args
+
+    class Sub extends Base
+        constructor: (args...) ->
+            args = (String::toUpperCase.call(x) for x in args)
+            super(args...)  # unpack args
+
+    sub = new Sub("some", "silly", "strings")
+
+    sub instanceof Sub  # true
+    sub instanceof Base  # also true! for free!
+    \end{minted}
+\end{frame}
+
+
+\slide{Classes: @ binding via =>}
+    \coffee
+    # this example begs for something simpler...
+    class MyView extends Backbone.View
+        events:
+            "click .my-button" : "buttonClicked"
+
+        initialize: () ->
+            @el.find(".second-button").click(@alsoClicked)
+            # no _.bind or _.bindAll in sight, right? but it
+            # works!
+        
+        buttonClicked: (ev) => # here the magic happens
+            @myButtonClicked = true
+
+        alsoClicked: (ev) =>
+            @secondButtonClicked = true
+    \end{minted}
+\end{frame}
+
+
+\slide{Other syntax sugar}
+
+    \coffee
+    # chained comparisons
+    a = if 0 < i < 10 then i else "Not in range!"
+
+    # existential operator and assignment
+    if not variable?
+        variable = "default value"
+
+    # shorter form
+    variable ?= "default value"
+
+    # also in place of accessor `.`
+    obj = {property: "value"}
+    obj.property.toUpperCase()  # ok
+    obj.otherProperty.toUpperCase()  # TypeError!
+    obj.otherProperty?.toUpperCase()  # undefined
     \end{minted}
 \end{frame}
 
