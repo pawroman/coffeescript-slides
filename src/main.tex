@@ -367,7 +367,6 @@
     # destructuring assignment (should be in the future JS)
     [first, middle..., last] = [1..10]
 
-
     first == 1 and last == 10 and middle.length == 8
     \end{minted}
 
@@ -455,8 +454,8 @@
             @el.find(".second-button").bind 'click', (ev) =>
                 @secondClicked = true
         
-        # automatically bound to each instance 
         buttonClicked: (ev) =>
+            # automatically bound to each instance 
             @buttonClicked = true
     \end{minted}
 \end{frame}
