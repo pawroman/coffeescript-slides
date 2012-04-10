@@ -380,18 +380,17 @@
         property: "value"
         number: 9
 
-    # equiv. of:
-    obj = {
-        "property" : "value",
-        "number" : 9
-    }
-
     for k, v of obj  # note the "of"!
         console.log k, v
 
     # keys only
     for k of obj
         console.log k
+
+    # iteration through object's own properties
+    # WITHOUT inherited ones (instead of hasOwnProperty)
+    for own k, v of otherObj
+        console.log k, v
     \end{minted}
 
 \end{frame}
